@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{url_for('static', filename=('css/style.css'))}}">
+    <title>{% block title %}{% endblock %}Money Lender</title>
+</head>
+<body>
+    <header>
+        <h1><a href="/">Money Lender</a></h1>
+        
+        <nav>
+            {% if current_user.is_authenticated %}
+            <a href="{{url_for('home')}}">Home</a>
+            <a href="{{url_for('dashboard')}}">Dashboard</a>
+            <a href="{{url_for('logout')}}">Logout</a>
+            {% else %}
+                <a href="{{url_for('login')}}">Login</a>
+            {% endif %}
+            
+            {% block links %}{% endblock %}
+        </nav>
+    </header>
+
+    <main>
+        {% block content %}
+        {% endblock %}
+    </main>
+    
+    {% block script %}
+    {% endblock %}
+    <script src="{{url_for('static', filename=('js/main.js'))}}"></script>
+</body>
+</html>

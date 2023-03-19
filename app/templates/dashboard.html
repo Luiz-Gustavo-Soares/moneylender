@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+
+<h2>Dashboard</h2>
+
+<div class="dashboard">
+
+    <form action="/api/login" method="POST" id="login">
+        <h3>Login</h3>
+
+        <label for="new-user"  id="new_user-label">Novo nome Usuario</label>
+        <input type="text" name="new_user" id="new-user" required placeholder="Nome usuario">
+
+        <label for="new-senha"  id="new-senha-label">Nova Senha</label>
+        <input type="password" name="new_senha" id="new-senha" required placeholder="Nova senha">
+
+        <label for="senha-anterior"  id="senha-anterior-label">Senha anterior</label>
+        <input type="password" name="senha_anterior" id="senha-anterior" required  placeholder="Senha anterior">
+
+
+        <button type="submit">Atualizar dados</button>
+    </form>
+
+    <form action="/api/config" method="POST" id="config">
+        <h3>Configuraçoes</h3>
+
+        <label for="dia-pagamento"  id="dia-pagamento-label">Dia de Pagamento: {{config.dia_cobranca}}</label>
+        <input type="number" name="dia" id="dia-pagamento" placeholder="Dia de cobrança" min="0" max="32">
+
+        <label for="valor-cobranca"  id="valor-cobranca-label">Valor Cobrança: {{config.valor}}</label>
+        <input type="number" name="valor" id="valor-cobranca" placeholder="Valor Cobrança" min="0" step="0.01">
+
+        <button type="submit">Atualizar dados</button>
+    </form>
+
+    <form action="" method="POST" id="devedores">
+        <h3>Devedores</h3>
+
+        <button type="submit">Atualizar dados</button>
+    </form>
+
+
+</div>
+
+{% endblock %}
+
+
+{% block script %}
+    <script src="{{url_for('static', filename=('js/dashboard.js'))}}"></script>
+{% endblock %}

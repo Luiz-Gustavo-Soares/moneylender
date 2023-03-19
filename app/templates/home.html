@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+    <h2>Dividas do Spotify 
+        <span class="logo-spotify">
+            <svg xmlns="http://www.w3.org/2000/svg" width="1em" fill="currentColor" class="bi bi-spotify" viewBox="0 0 16 16">
+                <path d="M8 0a8 8 0 1 0 0 16A8 8 0 0 0 8 0zm3.669 11.538a.498.498 0 0 1-.686.165c-1.879-1.147-4.243-1.407-7.028-.77a.499.499 0 0 1-.222-.973c3.048-.696 5.662-.397 7.77.892a.5.5 0 0 1 .166.686zm.979-2.178a.624.624 0 0 1-.858.205c-2.15-1.321-5.428-1.704-7.972-.932a.625.625 0 0 1-.362-1.194c2.905-.881 6.517-.454 8.986 1.063a.624.624 0 0 1 .206.858zm.084-2.268C10.154 5.56 5.9 5.419 3.438 6.166a.748.748 0 1 1-.434-1.432c2.825-.857 7.523-.692 10.492 1.07a.747.747 0 1 1-.764 1.288z"/>
+            </svg>
+        </span>
+    </h2>
+
+    <section class="dividas">
+
+        {% for divida in dividas %}
+            <div class="card-divida">
+                <img src="{{divida.devedor.foto_perfil}}" width="50px" alt="foto_perfil">
+                <p class="nome">{{divida.devedor.nome.capitalize()}}</p>
+                <p class="meses">Meses pendentes <span class="mes">{{divida.meses_devendo}}</span></p>
+                <button onclick="getAreaPagamento('{{divida.id}}')" >Pagar</button>
+            </div>
+        {% endfor %}
+    </section>
+    
+
+    <section class="area-pagamento">
+        <svg onclick="closeAreaPagamento()" xmlns="http://www.w3.org/2000/svg" width="1.3em"fill="currentColor" class="bi bi-x-lg" viewBox="0 0 16 16">
+            <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8 2.146 2.854Z"/>
+        </svg>
+        
+        <h3>Pagamento</h3>
+
+        <p class="valor">Valor Devendo: <strong id="parcela"> R$ --,--</strong> <button class="mostar-qr" id="mostar-qr-pix">Mostar QR </button></p>
+        
+        <p class="valor">Valor Parcela:  <strong id="total">R$ --,--</strong> <button  class="mostar-qr" id="mostar-qr-pix-total">Mostar QR</button> </p>
+
+
+        <h4>Dados Pix</h4>
+        <p class="dados">Nome: <strong>Luiz Gustavo Soares</strong></p>
+        <p class="dados">Email: <strong>gustavo120wa@gmail.com</strong></p>
+
+        <div class="qrs">
+            <h4>QR Code </h4>
+            <img src="{{url_for('static', filename='imgs/qrcode-pix.png')}}" alt="qr-code" class="qr-code pix">
+            <img src="{{url_for('static', filename='imgs/qrcode-pix.png')}}" alt="qr-code valor total" class="qr-code pix-total">
+        </div>
+
+        <p class="obs">Obs. Pode demorar até dois dias uteis para a divida ser atualizada.</p>
+    </section>
+
+{% endblock %}
+
+{% block script %}
+    <script src="{{url_for('static', filename=('js/pagamento.js'))}}"></script>
+{% endblock %}
