@@ -12,12 +12,12 @@
 
     <section class="dividas">
 
-        {% for divida in dividas %}
+        {% for devedor in devedores %}
             <div class="card-divida">
-                <img src="{{divida.devedor.foto_perfil}}" width="50px" alt="foto_perfil">
-                <p class="nome">{{divida.devedor.nome.capitalize()}}</p>
-                <p class="meses">Meses pendentes <span class="mes">{{divida.meses_devendo}}</span></p>
-                <button onclick="getAreaPagamento('{{divida.id}}')" >Pagar</button>
+                <img src="{{devedor.foto_perfil}}" width="50px" alt="foto_perfil">
+                <p class="nome">{{devedor.nome.capitalize()}}</p>
+                <p class="meses">Meses pendentes: <span class="mes">{{devedor.meses_devendo}}</span></p>
+                <button onclick="getAreaPagamento('{{devedor.id}}')" >Pagar</button>
             </div>
         {% endfor %}
     </section>

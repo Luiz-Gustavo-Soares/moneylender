@@ -35,12 +35,35 @@
         <button type="submit">Atualizar dados</button>
     </form>
 
-    <form action="" method="POST" id="devedores">
+    
+    <section>
+        
         <h3>Devedores</h3>
 
-        <button type="submit">Atualizar dados</button>
-    </form>
+        
+        <div class="forms-dividas">
+            {% for devedor in devedores %}
+                <form action="/api/devedores/divida/{{devedor.id}}" method="POST">
+                    <h4>{{devedor.nome.capitalize()}}</h4>
+                        <label for="meses-devendo">Meses Devendo: {{devedor.meses_devendo}}</label>
+                    <input type="number" name="meses_devendo" id="meses-devendo-{{devedor.id}}" placeholder="Nova quantidade de meses">
 
+                    <button>Atualizar</button>
+                </form>
+            {% endfor %}
+        </div>
+
+                
+        <form action="/api/devedores/add" method="POST" id="devedores-add">
+            <h3>Adicionar Devedor</h3>
+            
+            <input type="text" placeholder="Nome" name="nome" id="nome-devedor" required>
+            <input type="email" name="mail" id="mail-devedor" placeholder="E-mail" required>
+            <input type="url" name="foto_perfil" id="foto-perfil-devedor" placeholder="Foto de Perfil (url)">
+
+            <button type="submit">Adicionar Devedor</button>
+        </form>
+    </section>
 
 </div>
 

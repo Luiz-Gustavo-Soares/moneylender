@@ -8,20 +8,10 @@ class Devedores(db.Model):
     nome = db.Column(db.String(100))
     email = db.Column(db.String(100))
     foto_perfil = db.Column(db.String(250))
+    meses_devendo = db.Column(db.Integer())
 
     def __repr__(self):
         return '<Devedor %r>' % self.nome
-
-
-class Dividas(db.Model):
-    __tablename__ = 'dividas'
-    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    meses_devendo = db.Column(db.Integer())
-    devedor_id = db.Column(db.Integer, db.ForeignKey('devedores.id'))
-    devedor = db.relationship("Devedores", backref=backref("devedores", uselist=False))
-
-    def __repr__(self):
-        return '<Divida %r>' % self.id
 
 
 class Config(db.Model):

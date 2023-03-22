@@ -359,3 +359,38 @@ form button {
     margin: 35px 0px;
     height: min-content;
 }
+
+
+.dashboard section {
+    color: var(--color5);
+    background-color: var(--color4);
+    
+    height: min-content;
+    width: 100%;
+    margin: 35px 0px;
+    
+    border-radius: 20px;
+    padding: 10px 20px;
+
+    border-radius: 25px;
+    box-shadow: -4px -4px 0px var(--color1);   
+}
+
+.dashboard section h3 {
+    font-family: var(--font1);
+    text-align: center;
+
+    text-decoration: underline;
+    text-decoration-color: var(--color1);
+    padding: 20px 5px 15px;
+}
+
+.dashboard section .forms-dividas {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+.dashboard #devedores-add {
+    margin: 35px auto;
+}
