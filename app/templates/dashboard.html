@@ -43,13 +43,18 @@
         
         <div class="forms-dividas">
             {% for devedor in devedores %}
-                <form action="/api/devedores/divida/{{devedor.id}}" method="POST">
-                    <h4>{{devedor.nome.capitalize()}}</h4>
-                        <label for="meses-devendo">Meses Devendo: {{devedor.meses_devendo}}</label>
-                    <input type="number" name="meses_devendo" id="meses-devendo-{{devedor.id}}" placeholder="Nova quantidade de meses">
-
-                    <button>Atualizar</button>
-                </form>
+            
+            <form action="/api/devedores/divida/{{devedor.id}}" method="POST">
+                <h4>{{devedor.nome.capitalize()}}</h4>
+                <label for="meses-devendo">Meses Devendo: {{devedor.meses_devendo}}</label>
+                <input type="number" name="meses_devendo" id="meses-devendo-{{devedor.id}}" min="0" placeholder="Nova quantidade de meses">
+                
+                <button type="submit">Atualizar</button>
+                
+                {% if devedor.meses_devendo > 0 %}
+                <button type="button" onclick="enviarEmail('{{devedor.id}}')">Cobrar por email</button>
+                {% endif %}
+            </form>
             {% endfor %}
         </div>
 

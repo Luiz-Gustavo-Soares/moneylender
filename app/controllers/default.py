@@ -1,9 +1,14 @@
 from flask import render_template, url_for, jsonify, request, redirect
 from flask_login import login_user, logout_user, current_user
-from app import app, db, lm
+from flask_mail import Message
+
+from app import app, db, lm, mail
+
+from app.controllers import email_send
+from app.models.tables import Config, Login, Devedores
+
 from pixqrcode import PixQrCode
 from werkzeug.security import generate_password_hash
-from app.models.tables import Config, Login, Devedores
 
 @lm.user_loader
 def load_user(user_id):
@@ -63,6 +68,14 @@ def dashboard():
     else:
         return redirect(url_for('home'))
 
+
+@app.route('/api/enviaremail/<int:id>')
+def enviar_email(id):
+    if current_user.is_authenticated:
+        email_send.enviar_email_by_id(id)
+        return jsonify({'status': 'ok'})
+    else:
+        return jsonify({'status': 'not authenticated'})
 
 @app.route('/api/pagamento/<int:id>')
 def api_get_pagamento(id):
